@@ -1,0 +1,23 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rexpress.xposed.androidbrokenscreensaver">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="My phone's touch screen has hardware issue, it will randomly click on Y=210 lines. This Xposed module will ignore all MotionEvent for it." />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="47" />
+
+    </application>
+
+</manifest>
