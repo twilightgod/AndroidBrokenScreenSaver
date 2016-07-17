@@ -29,42 +29,23 @@ public class AndroidBrokenScreenSaverModule implements IXposedHookLoadPackage {
                     MotionEvent event = (MotionEvent) param.args[0];
                     //XLog("dispatchTouchEvent hooked: " + event.toString());
 
-                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
-                        case MotionEvent.ACTION_DOWN:
-                        case MotionEvent.ACTION_UP:
-                            float X = event.getX();
-                            float Y = event.getY();
+                     float X = event.getX();
+                     float Y = event.getY();
 
-                            // debug
-                            Object currentObj = param.thisObject;
-                            Activity currentActivity;
-                            if (currentObj instanceof Activity) {
-                                currentActivity = (Activity) currentObj;
-//                                Toast.makeText(currentActivity.getApplicationContext(), event.toString(), Toast.LENGTH_SHORT).show();
-                                Toast.makeText(currentActivity.getApplicationContext(), "X: " + Float.toString(X) + "Y: " + Float.toString(Y) + "\n" + event.toString(), Toast.LENGTH_SHORT).show();
-                            }
+                     if (Math.abs(Y - 259.8) < 1e-1 || Math.abs(Y - 211.8) < 1e-1) {
+                         param.setResult(true);
 
-                            if (Math.abs(Y - 259.8) < 1e-1 || Math.abs(Y - 211.8) < 1e-1) {
-                                param.setResult(null);
+                         // write log
+                         String msg = "Throw away " + event.toString();
+                         XLog(msg);
 
-                                // write log
-                                String msg = "Throw away " + event.toString();
-                                XLog(msg);
-/*
-                                // make a toast
-                                Object currentObj = param.thisObject;
-                                Activity currentActivity;
-                                if (currentObj instanceof Activity) {
-                                    currentActivity = (Activity) currentObj;
-                                    Toast.makeText(currentActivity.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                                }
-*/
-                                return;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+                         Object currentObj = param.thisObject;
+                         Activity currentActivity;
+                         if (currentObj instanceof Activity) {
+                             currentActivity = (Activity) currentObj;
+                             Toast.makeText(currentActivity.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                         }
+                     }
                 }
             });
 
