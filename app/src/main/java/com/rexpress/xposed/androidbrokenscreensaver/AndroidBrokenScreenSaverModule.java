@@ -32,7 +32,7 @@ public class AndroidBrokenScreenSaverModule implements IXposedHookLoadPackage {
                      float X = event.getX();
                      float Y = event.getY();
 
-                     if (Math.abs(Y - 259.8) < 1e-1 || Math.abs(Y - 211.8) < 1e-1) {
+                     if (Math.abs(Y - 259.8) < 1e-1 || Math.abs(Y - 211.8) < 1e-1 || Math.abs(Y - 70) < 1e-1) {
                          param.setResult(true);
 
                          // write log
