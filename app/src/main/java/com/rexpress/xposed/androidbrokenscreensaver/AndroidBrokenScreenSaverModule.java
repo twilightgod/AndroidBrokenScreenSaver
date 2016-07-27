@@ -45,8 +45,8 @@ public class AndroidBrokenScreenSaverModule implements IXposedHookLoadPackage {
                     toolType = event.getToolType(pointerIndex);
 
                     // Triggered by bad touch
-                    if (IsBadTouch(X, Y, toolType) && (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_DOWN || action == MotionEvent.ACTION_POINTER_UP)) {
-                        XLog("Triggered by bad touch, ignore. " + event.toString());
+                    if (IsBadTouch(X, Y, toolType) && (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_DOWN || action == MotionEvent.ACTION_POINTER_UP || action == MotionEvent.ACTION_CANCEL)) {
+                        //XLog("Triggered by bad touch, ignore. " + event.toString());
                         param.setResult(true);
                         return;
                     }
@@ -161,7 +161,7 @@ public class AndroidBrokenScreenSaverModule implements IXposedHookLoadPackage {
                         }
                         // Only bad touch
                         else if (badCount == event.getPointerCount()) {
-                            XLog("Move only contains bad touch, ignore. " + event.toString());
+                            //XLog("Move only contains bad touch, ignore. " + event.toString());
                             param.setResult(true);
                             return;
                         }
@@ -227,6 +227,6 @@ public class AndroidBrokenScreenSaverModule implements IXposedHookLoadPackage {
     }
 
     private boolean IsBadTouch(float X, float Y, int toolType) {
-        return toolType == MotionEvent.TOOL_TYPE_UNKNOWN || Math.abs(Y - 259.8) < 1e-1 || Math.abs(Y - 211.8) < 1e-1 || Math.abs(Y - 70) < 1e-1 || Math.abs(Y - 70) < 1e-1 || Math.abs(Y - 162.9) < 1e-1 || Math.abs(Y - 163.9) < 1e-1;
+        return toolType == MotionEvent.TOOL_TYPE_UNKNOWN || Math.abs(Y - 259.8) < 1 || Math.abs(Y - 127.9) < 1 || Math.abs(Y - 211.8) < 1 || Math.abs(Y - 70) < 1 || Math.abs(Y - 69) < 1 || Math.abs(Y - 68) < 1 || Math.abs(Y - 162.9) < 1 || Math.abs(Y - 163.9) < 1;
     }
 }
